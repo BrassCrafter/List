@@ -19,11 +19,12 @@ public class ListEditor {
             pList.append((int)(Math.random()*pListLength));
     }
     public static <T> void clearList(List<T> pList){
+        pList.toFirst();
         while(!pList.isEmpty()){
-            pList.toFirst();
+
             pList.remove();
         }
-        System.out.println("List cleared. ");
+        System.out.println("List cleared.");
     }
     public static <T> void reverseListInPlace(List<T> pList){
         pList.toFirst();
@@ -53,5 +54,15 @@ public class ListEditor {
         }
         pList.toFirst();
         return length;
+    }
+    public static <Integer> void mergeSortOnList(List<Integer> pList){
+        List<Integer> leftList = new List<Integer>();
+        List<Integer> rightList = new List<Integer>();
+        pList.toFirst();
+        while(!pList.isEmpty()){
+            leftList.append(pList.getContent());
+            pList.remove();
+
+        }
     }
 }
