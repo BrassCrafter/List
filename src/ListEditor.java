@@ -8,7 +8,9 @@ public class ListEditor {
         int listLength = 10;
         fillListWithInts(list, listLength);
         outputListToConsole(list);
-        reverseListInPlace(list);
+        selectionSortOnList(list);
+        //mergeSortOnList(list);
+        //reverseListInPlace(list);
         outputListToConsole(list);
         System.out.println("Length of list: " + getLengthOfList(list));
         clearList(list);
@@ -55,14 +57,69 @@ public class ListEditor {
         pList.toFirst();
         return length;
     }
-    public static <Integer> void mergeSortOnList(List<Integer> pList){
+    public static void mergeSortOnList(List<Integer> pList){
         List<Integer> leftList = new List<Integer>();
         List<Integer> rightList = new List<Integer>();
         pList.toFirst();
         while(!pList.isEmpty()){
             leftList.append(pList.getContent());
             pList.remove();
-
+            if(!pList.isEmpty()){
+                rightList.append(pList.getContent());
+                pList.remove();
+            }
         }
+        if(getLengthOfList(leftList) > 1)mergeSortOnList(leftList);
+        if(getLengthOfList(rightList) > 1)mergeSortOnList(rightList);
+        mergeLists(leftList, rightList, pList);
+    }
+    private static void mergeLists(List<Integer> pLeftList, List<Integer> pRightList, List<Integer> pList){
+        pLeftList.toFirst();
+        pRightList.toFirst();
+        while(!pLeftList.isEmpty() && !pRightList.isEmpty()){
+            if((pLeftList.getContent()) < pRightList.getContent()){
+                pList.append(pLeftList.getContent());
+                pLeftList.remove();
+            }else{
+                pList.append(pRightList.getContent());
+                pRightList.remove();
+            }
+        }
+        while(!pLeftList.isEmpty()){
+            pList.append(pLeftList.getContent());
+            pLeftList.remove();
+        }
+        while(!pRightList.isEmpty()){
+            pList.append(pRightList.getContent());
+            pRightList.remove();
+        }
+    }
+    public static void selectionSortOnList(List<Integer> pList){
+        int i = 0;
+        while(pList.hasAccess()){
+            if(i < getLengthOfList(pList))pList.toFirst();
+            System.out.println("i: " + i);
+            for(int j = 0; j < i; j++)pList.next();
+            int min = pList.getContent();
+            while(pList.hasAccess()){
+                if(pList.getContent() < min)min = pList.getContent();
+                pList.next();
+            }
+            System.out.println("Min: " + min);
+            pList.toFirst();
+            for(int j = 0; j < i; j++)pList.next();
+            while(pList.getContent() != min)pList.next();
+
+            pList.remove();
+            pList.toFirst();
+            pList.insert(min);
+            outputListToConsole(pList);
+            i++;
+            pList.next();
+        }
+        reverseListInPlace(pList);
+    }
+    public static void insertionSortOnList(List<Integer> pList){
+
     }
 }
