@@ -73,7 +73,7 @@ public class ListEditor {
         if(getLengthOfList(rightList) > 1)mergeSortOnList(rightList);
         mergeLists(leftList, rightList, pList);
     }
-    private static void mergeLists(List<Integer> pLeftList, List<Integer> pRightList, List<Integer> pList){
+    private static void mergeSortMerge(List<Integer> pLeftList, List<Integer> pRightList, List<Integer> pList){
         pLeftList.toFirst();
         pRightList.toFirst();
         while(!pLeftList.isEmpty() && !pRightList.isEmpty()){
